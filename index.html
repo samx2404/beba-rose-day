@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>For Beba 🌹</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
   margin: 0;
@@ -11,7 +12,10 @@ body {
   background: linear-gradient(135deg, #ffdde1, #ee9ca7);
   color: #333;
   text-align: center;
+  overflow-x: hidden;
 }
+
+/* Lock screen */
 #lock {
   height: 100vh;
   display: flex;
@@ -19,6 +23,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 input {
   padding: 10px;
   border-radius: 20px;
@@ -27,6 +32,7 @@ input {
   margin-top: 10px;
   text-align: center;
 }
+
 button {
   margin-top: 15px;
   padding: 10px 25px;
@@ -37,36 +43,63 @@ button {
   font-size: 16px;
   cursor: pointer;
 }
+
+/* Main content */
 #content {
   display: none;
   padding: 30px 15px;
 }
+
 h1 {
   color: #ff4b5c;
 }
+
 .rose {
   font-size: 40px;
   animation: float 2s infinite alternate;
 }
+
 @keyframes float {
   from { transform: translateY(0); }
   to { transform: translateY(-10px); }
 }
-.photos img {
-  width: 90%;
-  max-width: 300px;
-  border-radius: 15px;
-  margin: 10px 0;
-}
-.footer {
-  margin-top: 30px;
+
+/* Music button */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #ff4b5c;
+  color: white;
   font-size: 14px;
+  cursor: pointer;
+  display: none;
+  z-index: 999;
+}
+
+/* Falling roses */
+.petal {
+  position: fixed;
+  top: -10%;
+  font-size: 20px;
+  animation: fall linear infinite;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
 }
 </style>
 </head>
 
 <body>
 
+<!-- PASSWORD SCREEN -->
 <div id="lock">
   <h2>Private for Beba 💖</h2>
   <p>Enter the password 🌹</p>
@@ -74,6 +107,7 @@ h1 {
   <button onclick="unlock()">Unlock</button>
 </div>
 
+<!-- MAIN CONTENT -->
 <div id="content">
   <div class="rose">🌹</div>
   <h1>Happy Rose Day, Beba</h1>
@@ -91,31 +125,55 @@ h1 {
     Beba, you’re my favourite thought — every single day.
   </p>
 
-  <div class="photos">
-    <!-- ADD YOUR PHOTOS HERE -->
-    <img src="photo1.jpg" alt="Us">
-    <img src="photo2.jpg" alt="Memories">
-  </div>
-
   <p>
     Next Rose Day…  
     website nahi, main khud aaunga 😉
   </p>
 
-  <div class="footer">
-    Made with 💖 just for you  
-  </div>
+  <p style="margin-top:30px;font-size:14px;">
+    Made with 💖 just for you
+  </p>
 </div>
 
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="playMusic()">▶ Play Music 💖</button>
+
 <script>
+/* PASSWORD */
 function unlock() {
-  const password = "beba🌹"; // 👈 CHANGE PASSWORD HERE
+  const password = "beba🌹"; // 🔐 change if needed
   if (document.getElementById("pass").value === password) {
     document.getElementById("lock").style.display = "none";
     document.getElementById("content").style.display = "block";
+    document.getElementById("musicBtn").style.display = "block";
+    startPetals();
   } else {
     alert("Wrong password 💔");
   }
+}
+
+/* MUSIC */
+function playMusic() {
+  document.getElementById("bgMusic").play();
+}
+
+/* ROSE PETALS */
+function createPetal() {
+  const petal = document.createElement("div");
+  petal.className = "petal";
+  petal.innerText = "🌹";
+  petal.style.left = Math.random() * 100 + "vw";
+  petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+  document.body.appendChild(petal);
+  setTimeout(() => petal.remove(), 10000);
+}
+
+function startPetals() {
+  setInterval(createPetal, 500);
 }
 </script>
 
