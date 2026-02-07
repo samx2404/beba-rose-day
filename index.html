@@ -15,7 +15,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Lock screen */
+/* LOCK SCREEN */
 #lock {
   height: 100vh;
   display: flex;
@@ -25,7 +25,7 @@ body {
 }
 
 input {
-  padding: 10px;
+  padding: 12px;
   border-radius: 20px;
   border: none;
   outline: none;
@@ -44,10 +44,12 @@ button {
   cursor: pointer;
 }
 
-/* Main content */
+/* MAIN CONTENT */
 #content {
   display: none;
   padding: 30px 15px;
+  position: relative;
+  z-index: 2;
 }
 
 h1 {
@@ -55,7 +57,7 @@ h1 {
 }
 
 .rose {
-  font-size: 40px;
+  font-size: 42px;
   animation: float 2s infinite alternate;
 }
 
@@ -64,7 +66,7 @@ h1 {
   to { transform: translateY(-10px); }
 }
 
-/* Music button */
+/* MUSIC BUTTON */
 #musicBtn {
   position: fixed;
   bottom: 20px;
@@ -80,14 +82,14 @@ h1 {
   z-index: 999;
 }
 
-/* Falling roses */
+/* FALLING ROSES */
 .petal {
   position: fixed;
   top: -10%;
   font-size: 20px;
   animation: fall linear infinite;
   opacity: 0.8;
-  z-index: 0;
+  z-index: 1;
 }
 
 @keyframes fall {
@@ -99,7 +101,7 @@ h1 {
 
 <body>
 
-<!-- PASSWORD SCREEN -->
+<!-- 🔐 PASSWORD SCREEN -->
 <div id="lock">
   <h2>Private for Beba 💖</h2>
   <p>Enter the password 🌹</p>
@@ -107,7 +109,7 @@ h1 {
   <button onclick="unlock()">Unlock</button>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- 💖 MAIN CONTENT -->
 <div id="content">
   <div class="rose">🌹</div>
   <h1>Happy Rose Day, Beba</h1>
@@ -122,14 +124,13 @@ h1 {
   <p>
     You are my <b></b>cute little habit,
     the one that makes every day a little more special 🌸
-    Baby, you’re my favorite thought—every single day.
-  
+    Baby, you’re my favorite thought—every single day..
   </p>
 
   <p>
     I wish for next Rose Day…  
     website nahi, main khud aaunga 😉
-    I love you Beba 💖💖
+    I love you Beba 💖💖 😉
   </p>
 
   <p style="margin-top:30px;font-size:14px;">
@@ -137,7 +138,7 @@ h1 {
   </p>
 </div>
 
-<!-- MUSIC -->
+<!-- 🎵 MUSIC -->
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -145,9 +146,9 @@ h1 {
 <button id="musicBtn" onclick="playMusic()">▶ Play Music 💖</button>
 
 <script>
-/* PASSWORD */
+/* 🔐 PASSWORD FUNCTION */
 function unlock() {
-  const password = "beba🌹"; // 🔐 change if needed
+  const password = "beba🌹"; // change if needed
   if (document.getElementById("pass").value === password) {
     document.getElementById("lock").style.display = "none";
     document.getElementById("content").style.display = "block";
@@ -158,12 +159,12 @@ function unlock() {
   }
 }
 
-/* MUSIC */
+/* 🎵 MUSIC PLAY */
 function playMusic() {
   document.getElementById("bgMusic").play();
 }
 
-/* ROSE PETALS */
+/* 🌹 ROSE PETALS */
 function createPetal() {
   const petal = document.createElement("div");
   petal.className = "petal";
@@ -181,4 +182,3 @@ function startPetals() {
 
 </body>
 </html>
-
